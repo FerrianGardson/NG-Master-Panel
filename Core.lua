@@ -268,6 +268,11 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 --------/// MainPanel UI
 -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+function CloseMasterPanel()
+    MPA_MainPanel:Hide()
+end
+
 local MPA_MainPanel = CreateFrame("Frame", "MPA_MainPanel", UIParent)
 MPA_MainPanel:SetClampedToScreen(true)
 MPA_MainPanel:Hide()
@@ -276,6 +281,7 @@ MPA_MainPanel:SetSize(318.94, 120.25)
 MPA_MainPanel:SetPoint("CENTER", UIParent, "CENTER")
 MPA_MainPanel:EnableMouse()
 MPA_MainPanel:SetMovable(true)
+--[[ MPA_MainPanel:SetScript("OnEscapePressed", CloseMasterPanel) ]]
 MPA_MainPanel:SetScript("OnDragStart", function(self)
     self:StartMoving()
 end)
@@ -1972,8 +1978,8 @@ end)
 local SettingsFrame = CreateFrame("Frame", "SettingsFrame", MPA_MainPanel)
 SettingsFrame:Hide()
 SettingsFrame:SetWidth(300)
-SettingsFrame:SetHeight(210)
-SettingsFrame:SetPoint("CENTER", MPA_MainPanel, "CENTER", 0, 170)
+SettingsFrame:SetHeight(250)
+SettingsFrame:SetPoint("BOTTOM", MPA_MainPanel, "TOP", 0, 10)
 SettingsFrame:EnableMouse()
 SettingsFrame:SetFrameStrata("FULLSCREEN")
 
@@ -1986,19 +1992,19 @@ SettingsFrame.CloseButton = CreateFrame("BUTTON", "SettingsFrame.CloseButton", S
     "MasterPanel:CloseButtonTemplate");
 SettingsFrame.CloseButton:SetSize(23, 23)
 SettingsFrame.CloseButton:SetAlpha(.9)
-SettingsFrame.CloseButton:SetPoint("CENTER", SettingsFrame, "CENTER", 135, 90)
+SettingsFrame.CloseButton:SetPoint("TOPRIGHT", SettingsFrame, "TOPRIGHT", 0, 0)
 SettingsFrame.CloseButton:RegisterForClicks("AnyUp")
 SettingsFrame.CloseButton:SetScript("OnClick", function(self)
     SettingsFrame:Hide()
 end)
 
 SettingsFrame.Title = SettingsFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightLarge")
-SettingsFrame.Title:SetPoint("CENTER", SettingsFrame, "TOP", 0, -25)
+SettingsFrame.Title:SetPoint("TOPLEFT", SettingsFrame, "TOPLEFT", 25, -25)
 SettingsFrame.Title:SetText("Настройки")
 
 SettingsFrame.NPCSay =
     CreateFrame("CheckButton", "SettingsFrame_NPCSay", SettingsFrame, "ChatConfigCheckButtonTemplate");
-SettingsFrame.NPCSay:SetPoint("TOPLEFT", 15, -85);
+SettingsFrame.NPCSay:SetPoint("TOPLEFT", SettingsFrame.Title, "BOTTOMLEFT", 0, -10);
 SettingsFrame_NPCSayText:SetText("Альтернативный NPC SAY");
 SettingsFrame.NPCSay.tooltip = "Переключение в режим NPC SAY одной строки.";
 SettingsFrame.NPCSay:SetScript("OnClick", function()
@@ -2012,7 +2018,7 @@ end);
 
 SettingsFrame.AddName = CreateFrame("CheckButton", "SettingsFrame_AddName", SettingsFrame,
     "ChatConfigCheckButtonTemplate");
-SettingsFrame.AddName:SetPoint("TOPLEFT", 15, -110);
+SettingsFrame.AddName:SetPoint("TOPLEFT", SettingsFrame.NPCSay, "BOTTOMLEFT", 0, 0);
 SettingsFrame_AddNameText:SetText("Авто-добавление имени NPC");
 SettingsFrame.AddName.tooltip = "Авто-добавление имени NPC к эмоции.";
 SettingsFrame.AddName:SetScript("OnClick", function()
@@ -2026,8 +2032,8 @@ end);
 
 SettingsFrame.SaveFocusEditbox = CreateFrame("CheckButton", "SettingsFrame_SaveFocusEditbox", SettingsFrame,
     "ChatConfigCheckButtonTemplate");
-SettingsFrame.SaveFocusEditbox:SetPoint("TOPLEFT", 15, -135);
-SettingsFrame_SaveFocusEditboxText:SetText("Сохранение окна ввода.");
+SettingsFrame.SaveFocusEditbox:SetPoint("TOPLEFT", SettingsFrame.AddName, "BOTTOMLEFT", 0, 0);
+SettingsFrame_SaveFocusEditboxText:SetText("Сохранение окна ввода");
 SettingsFrame.SaveFocusEditbox.tooltip =
     "Сохранять фокус в окне редактирования после ввода.";
 SettingsFrame.SaveFocusEditbox:SetScript("OnClick", function()
@@ -2039,10 +2045,9 @@ SettingsFrame.SaveFocusEditbox:SetScript("OnClick", function()
     end
 end);
 
-SettingsFrame.NPCTalkAnimation =
-    CreateFrame("CheckButton", "SettingsFrame_NPCSay", SettingsFrame.SaveFocusEditbox, "ChatConfigCheckButtonTemplate");
+SettingsFrame.NPCTalkAnimation = CreateFrame("CheckButton", "SettingsFrame_NPCSay", SettingsFrame.SaveFocusEditbox,
+    "ChatConfigCheckButtonTemplate");
 SettingsFrame.NPCTalkAnimation:SetPoint("TOPLEFT", SettingsFrame.SaveFocusEditbox, "BOTTOMLEFT", 0, 0);
-SettingsFrame.NPCTalkAnimation:SetText("Альтернативный NPC SAY");
 SettingsFrame.NPCTalkAnimation.tooltip = "Переключение в режим NPC SAY одной строки.";
 SettingsFrame.NPCTalkAnimation:SetScript("OnClick", function()
     MasterPanel.db.profile.settings.NPCTalkAnimation = not MasterPanel.db.profile.settings.NPCTalkAnimation
@@ -2053,33 +2058,15 @@ SettingsFrame.NPCTalkAnimation:SetScript("OnClick", function()
         SettingsFrame.NPCTalkAnimation:SetChecked(false)
     end
 end);
+SettingsFrame.NPCTalkAnimation.label = SettingsFrame.NPCTalkAnimation:CreateFontString(nil, "ARTWORK",
+    "GameFontHighlight")
+SettingsFrame.NPCTalkAnimation.label:SetPoint("LEFT", SettingsFrame.NPCTalkAnimation, "RIGHT", 0, 0)
+SettingsFrame.NPCTalkAnimation.label:SetText("Включить NPC Talk Animation")
 
-SettingsFrame.RadiusSlider = CreateFrame("Slider", "MPA_RadiusSlider", SettingsFrame, "OptionsSliderTemplate")
 
-SettingsFrame.RadiusSlider:ClearAllPoints()
-SettingsFrame.RadiusSlider:SetPoint("CENTER", SettingsFrame, "TOP", 0, -60)
-SettingsFrame.RadiusSlider:SetWidth(150)
-SettingsFrame.RadiusSlider.tooltipText = "Регулирует радиус вещания ColorChat и TalkingHead."
-SettingsFrame.RadiusSlider:SetMinMaxValues(0, 89)
-SettingsFrame.RadiusSlider:SetValueStep(10)
-getglobal(SettingsFrame.RadiusSlider:GetName() .. 'Low'):SetText('Группа');
-getglobal(SettingsFrame.RadiusSlider:GetName() .. 'High'):SetText('89');
-getglobal(SettingsFrame.RadiusSlider:GetName() .. 'Text'):SetText(SettingsFrame.RadiusSlider:GetValue());
 
-SettingsFrame.RadiusSlider:SetScript("OnValueChanged", function(self)
-    local SliderValue = self:GetValue()
-    if SliderValue == 0 then
-        getglobal(SettingsFrame.RadiusSlider:GetName() .. 'Text'):SetText("Группа / рейд");
-    else
-        getglobal(SettingsFrame.RadiusSlider:GetName() .. 'Text'):SetText(
-            SettingsFrame.RadiusSlider:GetValue() .. " ярдов от Вас.");
-    end
-    MasterPanel.db.profile.settings.ChatRadius = tonumber(SliderValue)
-end)
-
-SettingsFrame.RollStateEditBox = CreateFrame("EditBox", "SettingsFrame.RollStateEditBox", SettingsFrame,
-    "InputBoxTemplate")
-SettingsFrame.RollStateEditBox:SetPoint("CENTER", SettingsFrame, "CENTER", 10, -75)
+SettingsFrame.RollStateEditBox = CreateFrame("EditBox", "SettingsFrame.RollStateEditBox", SettingsFrame, "InputBoxTemplate")
+SettingsFrame.RollStateEditBox:SetPoint("TOPLEFT", SettingsFrame.NPCTalkAnimation, "BOTTOMLEFT", 5, -20)
 SettingsFrame.RollStateEditBox:SetSize(32, 16)
 SettingsFrame.RollStateEditBox:SetAltArrowKeyMode(false)
 SettingsFrame.RollStateEditBox:SetAutoFocus(false)
@@ -2096,9 +2083,9 @@ SettingsFrame.RollStateEditBox:SetScript('OnEditFocusLost', function(self, elaps
     MasterPanel.db.profile.settings.RollStatic = tonumber(self:GetText())
 end)
 
-SettingsFrame.RollOneShotEditBox = CreateFrame("EditBox", "SettingsFrame.RollOneShotEditBox", SettingsFrame,
-    "InputBoxTemplate")
-SettingsFrame.RollOneShotEditBox:SetPoint("CENTER", SettingsFrame.RollStateEditBox, "CENTER", 50, 0)
+SettingsFrame.RollOneShotEditBox = CreateFrame("EditBox", "SettingsFrame.RollOneShotEditBox",
+    SettingsFrame.RollStateEditBox, "InputBoxTemplate")
+SettingsFrame.RollOneShotEditBox:SetPoint("LEFT", SettingsFrame.RollStateEditBox, "RIGHT", 10, 0)
 SettingsFrame.RollOneShotEditBox:SetSize(32, 16)
 SettingsFrame.RollOneShotEditBox:SetAltArrowKeyMode(false)
 SettingsFrame.RollOneShotEditBox:SetAutoFocus(false)
@@ -2117,9 +2104,9 @@ end)
 
 SettingsFrame.RollStateEditBox.Text = SettingsFrame.RollStateEditBox:CreateFontString(nil, "OVERLAY",
     "GameFontHighlight")
-SettingsFrame.RollStateEditBox.Text:SetPoint("LEFT", SettingsFrame.RollStateEditBox, "CENTER", -137, 0)
+SettingsFrame.RollStateEditBox.Text:SetPoint("LEFT", SettingsFrame.RollOneShotEditBox, "RIGHT", 5, 0)
 SettingsFrame.RollStateEditBox.Text:SetFontObject(GameFontHighlight)
-SettingsFrame.RollStateEditBox.Text:SetText("Эмоции NPC-Roll:")
+SettingsFrame.RollStateEditBox.Text:SetText("Эмоции NPC-Roll")
 
 SettingsFrame.RollStateEditBox.Static = SettingsFrame.RollStateEditBox:CreateFontString(nil, "OVERLAY",
     "GameFontHighlight")
@@ -2132,6 +2119,29 @@ SettingsFrame.RollOneShotEditBox.OneShot = SettingsFrame.RollOneShotEditBox:Crea
 SettingsFrame.RollOneShotEditBox.OneShot:SetPoint("CENTER", SettingsFrame.RollOneShotEditBox, "CENTER", -2, 15)
 SettingsFrame.RollOneShotEditBox.OneShot:SetFontObject(GameFontHighlightSmall)
 SettingsFrame.RollOneShotEditBox.OneShot:SetText("OneShot")
+
+SettingsFrame.RadiusSlider = CreateFrame("Slider", "MPA_RadiusSlider", SettingsFrame.RollStateEditBox, "OptionsSliderTemplate")
+SettingsFrame.RadiusSlider:ClearAllPoints()
+SettingsFrame.RadiusSlider:SetPoint("TOPLEFT", SettingsFrame.RollStateEditBox, "TOPLEFT", 0, -35)
+SettingsFrame.RadiusSlider:SetWidth(150)
+SettingsFrame.RadiusSlider.tooltipText = "Регулирует радиус вещания ColorChat и TalkingHead."
+SettingsFrame.RadiusSlider:SetMinMaxValues(0, 89)
+SettingsFrame.RadiusSlider:SetValueStep(10)
+getglobal(SettingsFrame.RadiusSlider:GetName() .. 'Low'):SetText('Группа');
+getglobal(SettingsFrame.RadiusSlider:GetName() .. 'High'):SetText('89');
+getglobal(SettingsFrame.RadiusSlider:GetName() .. 'Text'):SetText(SettingsFrame.RadiusSlider:GetValue());
+SettingsFrame.RadiusSlider:SetScript("OnValueChanged", function(self)
+    local SliderValue = self:GetValue()
+    if SliderValue == 0 then
+        getglobal(SettingsFrame.RadiusSlider:GetName() .. 'Text'):SetText("Группа / рейд");
+    else
+        getglobal(SettingsFrame.RadiusSlider:GetName() .. 'Text'):SetText(
+            SettingsFrame.RadiusSlider:GetValue() .. " ярдов от Вас.");
+    end
+    MasterPanel.db.profile.settings.ChatRadius = tonumber(SliderValue)
+end)
+
+
 -- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 --[[                            Frames closer                                ]]
 -- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -2268,6 +2278,3 @@ function MasterPanel:RaidSumm()
         SendChatMessage(".sum " .. Sum_name, "WHISPER", GetDefaultLanguage("player"), GetUnitName("player"));
     end
 end
-
--- / Открывает аддон при загрузке интерфейса
-MPA_MainPanel:Show()
