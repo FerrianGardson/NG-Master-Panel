@@ -1,5 +1,5 @@
 ﻿-------------------------------------
------// Binding Variables
+-----// Binding Variables 123
 -------------------------------------
 BINDING_HEADER_SEARCHANDDELHEADER = "Noblegarden: Master Panel (Поиск и Удаление)";
 BINDING_NAME_MPA_DELNPC = "Удалить НПС";
