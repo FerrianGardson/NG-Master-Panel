@@ -1,0 +1,797 @@
+﻿<Ui xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="BattlePanel.lua" />
+	<Frame name="MPA_BattlePanel" inherits="BackdropTemplate" parent="UIParent" toplevel="true" movable="true" frameStrata="MEDIUM" enableMouse="true">
+		<Size x="307" y="295" />
+		<Backdrop bgFile="Interface\AddOns\DMPanelNoble\IMG\DopPanels" edgeFile="">
+			<BackgroundInsets right="-100" bottom="-240" />
+		</Backdrop>
+		<Frames>
+			<Button name="SetHPBtn" inherits="UIPanelButtonTemplate" text="Выставить ОЗ">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="10" y="-20" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SetHPBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="SetHPEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="34" y="32" />
+				<Anchors>
+					<Anchor x="116" y="-16" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="DamHPBtn" inherits="UIPanelButtonTemplate" text="Снять ОЗ">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="10" y="-51" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DamHPBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="DamHPEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="34" y="32" />
+				<Anchors>
+					<Anchor x="116" y="-47" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<EditBox name="AddHPEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="34" y="32" />
+				<Anchors>
+					<Anchor x="116" y="-78" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="AddHPBtn" inherits="UIPanelButtonTemplate" text="Добавить ОЗ">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="10" y="-82" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AddHPBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SetWoundBtn" inherits="UIPanelButtonTemplate" text="Доб. рану">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="10" y="-113" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SetWoundBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="SetWoundEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="34" y="32" />
+				<Anchors>
+					<Anchor x="116" y="-109" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="SetAPBtn" inherits="UIPanelButtonTemplate" text="Выст. броню">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="167" y="-20" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SetAPBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="SetAPEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="34" y="32" />
+				<Anchors>
+					<Anchor x="273" y="-16" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="WakeUpBtn" inherits="UIPanelButtonTemplate" text=".wakeup">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="167" y="-113" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						WakeUpBtn_OnClick()
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:AddLine("Полностью снять с персонажа ОЗ, броню и энергию.")
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="AddAPBtn" inherits="UIPanelButtonTemplate" text="Доб. броню">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="167" y="-82" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AddAPBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="AddAPEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="34" y="32" />
+				<Anchors>
+					<Anchor x="273" y="-78" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<EditBox name="DamAPEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="34" y="32" />
+				<Anchors>
+					<Anchor x="273" y="-47" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="DamAPBtn" inherits="UIPanelButtonTemplate" text="Снять броню">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="167" y="-51" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DamAPBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="SetPhysResEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="34" y="32" />
+				<Anchors>
+					<Anchor x="273" y="-149" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="SetPhysResBtn" inherits="UIPanelButtonTemplate" text="Физ. защита">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="167" y="-153" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SetPhysResBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SetStrBtn" inherits="UIPanelButtonTemplate" text="Сила">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="10" y="-153" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SetStrBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="SetStrEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="34" y="32" />
+				<Anchors>
+					<Anchor x="116" y="-149" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="SetAgilBtn" inherits="UIPanelButtonTemplate" text="Ловкость">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="10" y="-184" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SetAgilBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="SetAgilEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="34" y="32" />
+				<Anchors>
+					<Anchor x="116" y="-180" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="SetMagResBtn" inherits="UIPanelButtonTemplate" text="Маг. защита">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="167" y="-184" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SetMagResBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="SetMagResEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="34" y="32" />
+				<Anchors>
+					<Anchor x="273" y="-180" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="SetIntBtn" inherits="UIPanelButtonTemplate" text="Интеллект">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="10" y="-215" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SetIntBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="SetIntEditBox" inherits="InputBoxTemplate" font="" letters="3" numeric="true" autoFocus="false">
+				<Size x="34" y="32" />
+				<Anchors>
+					<Anchor x="116" y="-211" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="CheckStatsBtn" inherits="UIPanelButtonTemplate" text="Проверить">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="167" y="-215" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						CheckStatsBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="ApplyStatsBtn" inherits="UIPanelButtonTemplate" text="Применить">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="10" y="-249" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ApplyStatsBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="ApplyStatsByRadiusBtn" inherits="UIPanelButtonTemplate" text="Прим. на копии">
+				<Size x="140" y="25" />
+				<Anchors>
+					<Anchor x="127" y="-249" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ApplyStatsByRadiusBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="OpenDiceFrameBtn" inherits="BackdropTemplate" enableMouseClicks="true">
+				<Size x="32" y="32" />
+				<Anchors>
+					<Anchor x="272" y="-211" point="TOPLEFT" />
+				</Anchors>
+				<Backdrop bgFile="interface\icons\ability_rogue_rollthebones" />
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:AddLine("Открыть окно кубов НПС.")
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnMouseDown>
+						OpenDiceFrameBtn_OnMouseDown()
+					</OnMouseDown>
+				</Scripts>
+			</Frame>
+			<Frame name="OpenStatesFrameBtn" inherits="BackdropTemplate" enableMouseClicks="true">
+				<Size x="32" y="32" />
+				<Anchors>
+					<Anchor x="272" y="-246" point="TOPLEFT" />
+				</Anchors>
+				<Backdrop bgFile="interface\icons\ability_mage_timewarp" />
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:AddLine("Открыть окно бафов/дебафов.")
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnMouseDown>
+						OpenStatesFrameBtn_OnMouseDown()
+					</OnMouseDown>
+				</Scripts>
+			</Frame>
+			<Frame name="CloseBattlePanelBtn" inherits="BackdropTemplate">
+				<Size x="13" y="16" />
+				<Anchors>
+					<Anchor x="298" y="-3" point="TOPLEFT" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" keyType="string" type="global" />
+				</KeyValues>
+				<Backdrop bgFile="Interface\AddOns\CharacterStats\assets\close">
+					<BackgroundInsets left="-5" right="-5" top="-5" bottom="-5" />
+				</Backdrop>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:AddLine("Закрыть окно.")
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnMouseDown>
+						CloseMainFrameBtn_OnMouseDown()
+					</OnMouseDown>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForDrag("LeftButton")
+				DefaultValues()
+			</OnLoad>
+			<OnDragStart>
+				self:StartMoving()
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing()
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+	<Frame name="DiceFrame" inherits="BackdropTemplate" parent="MPA_BattlePanel">
+		<Size x="167" y="84" />
+		<Anchors>
+			<Anchor x="0" y="84" point="TOP" />
+		</Anchors>
+		<Backdrop bgFile="Interface\AddOns\DMPanelNoble\IMG\DopPanels">
+			<BackgroundInsets left="-2" right="-50" top="-1" bottom="-70" />
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="TargetNameLabel" inherits="GameFontNormal" text="&lt; Нет цели &gt;">
+					<Size x="146" y="20" />
+					<Anchors>
+						<Anchor x="9" y="-52" point="TOPLEFT" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="StrDiceBtn" inherits="BackdropTemplate" enableMouseClicks="true">
+				<Size x="32" y="32" />
+				<Anchors>
+					<Anchor x="9" y="-10" point="TOPLEFT" />
+				</Anchors>
+				<Backdrop bgFile="interface\icons\inv_jewelcrafting_dragonseye05" />
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:AddLine("Бросить куб силы.")
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnMouseDown>
+						StrDiceBtn_OnMouseDown()
+					</OnMouseDown>
+				</Scripts>
+			</Frame>
+			<Frame name="AgilDiceBtn" inherits="BackdropTemplate" enableMouseClicks="true">
+				<Size x="32" y="32" />
+				<Anchors>
+					<Anchor x="47" y="-10" point="TOPLEFT" />
+				</Anchors>
+				<Backdrop bgFile="interface\icons\inv_jewelcrafting_dragonseye03" />
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:AddLine("Бросить куб ловкости.")
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnMouseDown>
+						AgilDiceBtn_OnMouseDown()
+					</OnMouseDown>
+				</Scripts>
+			</Frame>
+			<Frame name="IntDiceBtn" inherits="BackdropTemplate" enableMouseClicks="true">
+				<Size x="32" y="32" />
+				<Anchors>
+					<Anchor x="85" y="-10" point="TOPLEFT" />
+				</Anchors>
+				<Backdrop bgFile="interface\icons\inv_jewelcrafting_dragonseye04" />
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:AddLine("Бросить куб интеллекта.")
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnMouseDown>
+						IntDiceBtn_OnMouseDown()
+					</OnMouseDown>
+				</Scripts>
+			</Frame>
+			<Frame name="TargetDiceBtn" inherits="BackdropTemplate" enableMouseClicks="true">
+				<Size x="32" y="32" />
+				<Anchors>
+					<Anchor x="123" y="-10" point="TOPLEFT" />
+				</Anchors>
+				<Backdrop bgFile="interface\icons\ability_hunter_markedfordeath" />
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:AddLine("Выбрать цель для кубов.")
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnMouseDown>
+						TargetDiceBtn_OnMouseDown()
+					</OnMouseDown>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				DiceFrame:Show()
+			</OnLoad>
+		</Scripts>
+	</Frame>
+	<Frame name="StateFrame" inherits="BackdropTemplate" parent="UIParent" movable="true" frameStrata="HIGH" enableMouse="true">
+		<Size x="473" y="295" />
+		<Backdrop bgFile="Interface\AddOns\DMPanelNoble\IMG\DopPanels">
+			<BackgroundInsets right="-135" bottom="-240" />
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="NDLabel" inherits="GameFontNormal" text="Иные хар-ки">
+					<Size x="89" y="20" />
+					<Anchors>
+						<Anchor x="32" y="-17" point="TOPLEFT" />
+					</Anchors>
+				</FontString>
+				<FontString name="BuffLabel" inherits="GameFontNormal" text="Усиления">
+					<Size x="89" y="20" />
+					<Anchors>
+						<Anchor x="194" y="-18" point="TOPLEFT" />
+					</Anchors>
+				</FontString>
+				<FontString name="ActionsLabel" inherits="GameFontNormal" text="Действия">
+					<Size x="89" y="20" />
+					<Anchors>
+						<Anchor x="353" y="-18" point="TOPLEFT" />
+					</Anchors>
+				</FontString>
+				<FontString name="WoundsLabel" inherits="GameFontNormal" text="Ранения">
+					<Size x="89" y="20" />
+					<Anchors>
+						<Anchor x="353" y="-96" point="TOPLEFT" />
+					</Anchors>
+				</FontString>
+				<FontString name="DebuffLabel" inherits="GameFontNormal" text="Негативные">
+					<Size x="89" y="20" />
+					<Anchors>
+						<Anchor x="194" y="-96" point="TOPLEFT" />
+					</Anchors>
+				</FontString>
+				<FontString name="DefaultLabel" inherits="GameFontNormal" text="Стандартные">
+					<Size x="89" y="20" />
+					<Anchors>
+						<Anchor x="32" y="-95" point="TOPLEFT" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="CloseStateFrameBtn" inherits="BackdropTemplate">
+				<Size x="13" y="16" />
+				<Anchors>
+					<Anchor x="453" y="-3" point="TOPLEFT" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" keyType="string" type="global" />
+				</KeyValues>
+				<Backdrop bgFile="Interface\AddOns\CharacterStats\assets\close">
+					<BackgroundInsets left="-5" right="-5" top="-5" bottom="-5" />
+				</Backdrop>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:AddLine("Закрыть окно.")
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
+					<OnMouseDown>
+						CloseStateFrameBtn_OnMouseDown()
+					</OnMouseDown>
+				</Scripts>
+			</Frame>
+			<EditBox name="SetFocusEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="33" y="20" />
+				<Anchors>
+					<Anchor x="120" y="-180" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="SetFocusBtn" inherits="UIPanelButtonTemplate" text="Выст. фокус">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="12" y="-177" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SetFocusBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="DamFocusBtn" inherits="UIPanelButtonTemplate" text="Снять фокус">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="12" y="-208" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DamFocusBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="DamFocusEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="33" y="20" />
+				<Anchors>
+					<Anchor x="120" y="-211" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<EditBox name="AddFocusEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="33" y="20" />
+				<Anchors>
+					<Anchor x="120" y="-242" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="AddFocusBtn" inherits="UIPanelButtonTemplate" text="Доб. фокус">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="12" y="-239" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AddFocusBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="NDDropDownMenu" inherits="UIDropDownMenuTemplate">
+				<Size x="167" y="32" />
+				<Anchors>
+					<Anchor x="-36" y="-26" point="LEFT" relativeTo="NDLabel" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" keyType="string" type="global" />
+				</KeyValues>
+			</Frame>
+			<Button name="NDApplyBtn" inherits="UIPanelButtonTemplate" parent="StateFrame" text="Применить">
+				<Size x="88" y="23" />
+				<Anchors>
+					<Anchor x="12" y="-66" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						NDApplyBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="BuffDropDownMenu" inherits="UIDropDownMenuTemplate">
+				<Size x="167" y="32" />
+				<Anchors>
+					<Anchor x="125" y="-26" point="LEFT" relativeTo="NDLabel" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" keyType="string" type="global" />
+				</KeyValues>
+			</Frame>
+			<Button name="BuffApplyBtn" inherits="UIPanelButtonTemplate" parent="StateFrame" text="Применить">
+				<Size x="88" y="23" />
+				<Anchors>
+					<Anchor x="173" y="-66" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						BuffApplyBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="NDEditBox" inherits="InputBoxTemplate" parent="StateFrame" letters="3" numeric="true" autoFocus="false">
+				<Size x="35" y="32" />
+				<Anchors>
+					<Anchor x="105" y="-62" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<EditBox name="BuffEditBox" inherits="InputBoxTemplate" parent="StateFrame" letters="3" numeric="true" autoFocus="false">
+				<Size x="35" y="32" />
+				<Anchors>
+					<Anchor x="266" y="-62" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<EditBox name="ActionsEditBox" inherits="InputBoxTemplate" parent="StateFrame" letters="3" numeric="true" autoFocus="false">
+				<Size x="35" y="32" />
+				<Anchors>
+					<Anchor x="427" y="-62" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="ActionsApplyBtn" inherits="UIPanelButtonTemplate" parent="StateFrame" text="Применить">
+				<Size x="88" y="23" />
+				<Anchors>
+					<Anchor x="334" y="-66" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						ActionsApplyBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="ActionsDropDownMenu" inherits="UIDropDownMenuTemplate">
+				<Size x="167" y="32" />
+				<Anchors>
+					<Anchor x="286" y="-26" point="LEFT" relativeTo="NDLabel" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" keyType="string" type="global" />
+				</KeyValues>
+			</Frame>
+			<Frame name="WoundsDropDownMenu" inherits="UIDropDownMenuTemplate">
+				<Size x="167" y="32" />
+				<Anchors>
+					<Anchor x="286" y="-104" point="LEFT" relativeTo="NDLabel" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" keyType="string" type="global" />
+				</KeyValues>
+			</Frame>
+			<Button name="WoundsApplyBtn" inherits="UIPanelButtonTemplate" parent="StateFrame" text="Применить">
+				<Size x="88" y="23" />
+				<Anchors>
+					<Anchor x="334" y="-144" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						WoundsApplyBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="WoundsEditBox" inherits="InputBoxTemplate" parent="StateFrame" letters="3" numeric="true" autoFocus="false">
+				<Size x="35" y="32" />
+				<Anchors>
+					<Anchor x="427" y="-140" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<EditBox name="DebuffEditBox" inherits="InputBoxTemplate" parent="StateFrame" letters="3" numeric="true" autoFocus="false">
+				<Size x="35" y="32" />
+				<Anchors>
+					<Anchor x="266" y="-140" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<EditBox name="DefaultEditBox" inherits="InputBoxTemplate" parent="StateFrame" letters="3" numeric="true" autoFocus="false">
+				<Size x="35" y="32" />
+				<Anchors>
+					<Anchor x="105" y="-140" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="DebuffApplyBtn" inherits="UIPanelButtonTemplate" parent="StateFrame" text="Применить">
+				<Size x="88" y="23" />
+				<Anchors>
+					<Anchor x="173" y="-144" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DebuffApplyBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="DebuffDropDownMenu" inherits="UIDropDownMenuTemplate">
+				<Size x="167" y="32" />
+				<Anchors>
+					<Anchor x="125" y="-104" point="LEFT" relativeTo="NDLabel" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" keyType="string" type="global" />
+				</KeyValues>
+			</Frame>
+			<Button name="DefaultApplyBtn" inherits="UIPanelButtonTemplate" parent="StateFrame" text="Применить">
+				<Size x="88" y="23" />
+				<Anchors>
+					<Anchor x="12" y="-144" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DefaultApplyBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Frame name="DefaultDropDownMenu" inherits="UIDropDownMenuTemplate">
+				<Size x="167" y="32" />
+				<Anchors>
+					<Anchor x="-36" y="-104" point="LEFT" relativeTo="NDLabel" />
+				</Anchors>
+				<KeyValues>
+					<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" keyType="string" type="global" />
+				</KeyValues>
+			</Frame>
+			<Button name="AddEnergyBtn" inherits="UIPanelButtonTemplate" text="Доб. энергию">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="173" y="-239" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AddEnergyBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="AddEnergyEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="33" y="20" />
+				<Anchors>
+					<Anchor x="280" y="-242" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<EditBox name="DamEnergyEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="33" y="20" />
+				<Anchors>
+					<Anchor x="280" y="-212" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+			<Button name="DamEnergyBtn" inherits="UIPanelButtonTemplate" text="Снять энергию">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="173" y="-208" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DamEnergyBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SetEnergyBtn" inherits="UIPanelButtonTemplate" text="Выст. энергию">
+				<Size x="100" y="25" />
+				<Anchors>
+					<Anchor x="173" y="-177" point="TOPLEFT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						SetEnergyBtn_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<EditBox name="SetEnergyEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
+				<Size x="33" y="20" />
+				<Anchors>
+					<Anchor x="280" y="-180" point="TOPLEFT" />
+				</Anchors>
+			</EditBox>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForDrag("LeftButton")
+				DefaultValues()
+				StateFrame:Hide()
+				MPA_BattlePanel:Hide()
+				MPA_BattlePanel:SetClampedToScreen(true)
+				StateFrame:SetClampedToScreen(true)
+			</OnLoad>
+			<OnDragStart>
+				self:StartMoving()
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing()
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+</Ui>

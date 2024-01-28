@@ -1,0 +1,21 @@
+## Interface: 30300
+## Title: |cffff9716[N] |r|cffA330C9Master Panel|r
+## Version: 1.15
+## Notes: With Mayday BattlePanel. With Erlano notes.
+## Dependencies: AIO_Client, Noble_UI
+## SavedVariables: MinMapDB
+
+embeds.xml
+UITemplates.xml
+bindings.lua
+bindings.xml
+BattlePanel.xml
+
+Core.lua
+MinimapButton.lua
+SearchAndDel.lua
+BattlePanel.lua
+WayPoints.lua
+
+
+GobAPI.lua

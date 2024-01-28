@@ -1,0 +1,643 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+	<Frame name="MasterPanel:IconButtonBG" virtual="true">
+                <Size>
+                        <AbsDimension x="60" y="60"/>
+                </Size>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                      <Texture file="Interface\AddOns\MasterPanel\IMG\blank.blp">
+                        <TexCoords left="0.85" right="1" top="0.005" bottom="0.314" />
+                      </Texture>
+                    </Layer>
+                </Layers>
+    </Frame>
+    
+    <Frame name="MasterPanel:MiniIconButtonBG" virtual="true">
+                <Size>
+                        <AbsDimension x="38" y="38"/>
+                </Size>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                      <Texture file="Interface\AddOns\MasterPanel\IMG\blank.blp" alpha="0.9">
+                        <TexCoords left="0.85" right="1" top="0.005" bottom="0.314" />
+                      </Texture>
+                    </Layer>
+                </Layers>
+    </Frame>
+    
+    <Button name="MasterPanel:MiniIconButtonTemplate" virtual="true">
+        <Size>
+            <AbsDimension x="27" y="27"/>
+        </Size>
+        <Anchors>
+            <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+              <Offset>
+                <AbsDimension x="0" y="0" />
+              </Offset>
+            </Anchor>
+        </Anchors>
+                        <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="7" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+        <Scripts>
+         <OnLoad>
+           self:RegisterForClicks("AnyUp");
+         </OnLoad>
+        </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:CloseButtonTemplate" virtual="true">
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\blank.blp">
+                	<TexCoords left="0.855" right="0.905" top="0.353" bottom="0.454" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\blank.blp" alphaMode="ADD">
+                	<TexCoords left="0.855" right="0.905" top="0.353" bottom="0.454" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\blank.blp">
+                	<TexCoords left="0.855" right="0.905" top="0.353" bottom="0.454" />
+                </PushedTexture>
+    </Button>
+    
+    <Button name="MasterPanel:RefreshButtonTemplate" virtual="true">
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\blank.blp">
+                	<TexCoords left="0.925" right="0.975" top="0.353" bottom="0.454" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\blank.blp" alphaMode="ADD">
+                	<TexCoords left="0.925" right="0.975" top="0.353" bottom="0.454" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\blank.blp">
+                	<TexCoords left="0.925" right="0.975" top="0.353" bottom="0.454" />
+                </PushedTexture>
+    </Button>
+    
+    <Button name="MasterPanel:NPCSAYButton" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0" right="0.476" top="0" bottom="0.078" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp" alphaMode="ADD">
+                	<TexCoords left="0" right="0.476" top="0.079" bottom="0.156" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0" right="0.476" top="0.157" bottom="0.234" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:NPCEmoteButton" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0.526" right="1" top="0" bottom="0.078" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp" alphaMode="ADD">
+                	<TexCoords left="0.526" right="1" top="0.079" bottom="0.156" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0.526" right="1" top="0.157" bottom="0.234" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:NPCYellButton" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0" right="0.476" top="0.25" bottom="0.327" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp" alphaMode="ADD">
+                	<TexCoords left="0" right="0.476" top="0.328" bottom="0.406" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0" right="0.476" top="0.407" bottom="0.484" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:NPCTalkingHeadButton" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0.526" right="1" top="0.25" bottom="0.327" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp" alphaMode="ADD">
+                	<TexCoords left="0.526" right="1" top="0.328" bottom="0.406" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0.526" right="1" top="0.407" bottom="0.484" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:NPCColourButton" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0" right="0.476" top="0.492" bottom="0.570" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp" alphaMode="ADD">
+                	<TexCoords left="0" right="0.476" top="0.571" bottom="0.648" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0" right="0.476" top="0.649" bottom="0.726" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:LoCrButtonTemplate" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0.526" right="1" top="0.492" bottom="0.570" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp" alphaMode="ADD">
+                	<TexCoords left="0.526" right="1" top="0.571" bottom="0.648" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0.526" right="1" top="0.649" bottom="0.726" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:LoObjButtonTemplate" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0" right="0.476" top="0.735" bottom="0.812" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp" alphaMode="ADD">
+                	<TexCoords left="0" right="0.476" top="0.813" bottom="0.890" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0" right="0.476" top="0.891" bottom="0.968" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:MorphButtonTemplate" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0.526" right="1" top="0.735" bottom="0.812" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp" alphaMode="ADD">
+                	<TexCoords left="0.526" right="1" top="0.813" bottom="0.890" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons.blp">
+                	<TexCoords left="0.526" right="1" top="0.891" bottom="0.968" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:DeMorphButtonTemplate" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0" right="0.476" top="0" bottom="0.078" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp" alphaMode="ADD">
+                	<TexCoords left="0" right="0.476" top="0.079" bottom="0.156" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0" right="0.476" top="0.157" bottom="0.234" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:PhaseButtonTemplate" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0.526" right="1" top="0" bottom="0.078" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp" alphaMode="ADD">
+                	<TexCoords left="0.526" right="1" top="0.079" bottom="0.156" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0.526" right="1" top="0.157" bottom="0.234" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:IconButtonTemplate" virtual="true">
+        <Size>
+            <AbsDimension x="42" y="42"/>
+        </Size>
+        <Anchors>
+            <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+              <Offset>
+                <AbsDimension x="0" y="0" />
+              </Offset>
+            </Anchor>
+        </Anchors>
+        <Scripts>
+         <OnLoad>
+           self:RegisterForClicks("AnyUp");
+         </OnLoad>
+        </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:PossUnpossButton" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0" right="0.476" top="0.25" bottom="0.327" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp" alphaMode="ADD">
+                	<TexCoords left="0" right="0.476" top="0.328" bottom="0.406" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0" right="0.476" top="0.407" bottom="0.484" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:WaypointButtonTemplate" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0.526" right="1" top="0.25" bottom="0.327" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp" alphaMode="ADD">
+                	<TexCoords left="0.526" right="1" top="0.328" bottom="0.406" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0.526" right="1" top="0.407" bottom="0.484" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:BattleButtonTemplate" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0" right="0.476" top="0.492" bottom="0.570" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp" alphaMode="ADD">
+                	<TexCoords left="0" right="0.476" top="0.571" bottom="0.648" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0" right="0.476" top="0.649" bottom="0.726" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:WPClearButtonTemplate" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons3.blp">
+                	<TexCoords left="0.526" right="1" top="0" bottom="0.078" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons3.blp" alphaMode="ADD">
+                	<TexCoords left="0.526" right="1" top="0.079" bottom="0.156" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons3.blp">
+                	<TexCoords left="0.526" right="1" top="0.157" bottom="0.234" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:WPGOButtonTemplate" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons3.blp">
+                	<TexCoords left="0" right="0.476" top="0.25" bottom="0.327" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons3.blp" alphaMode="ADD">
+                	<TexCoords left="0" right="0.476" top="0.328" bottom="0.406" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons3.blp">
+                	<TexCoords left="0" right="0.476" top="0.407" bottom="0.484" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:WPMoveButtonTemplate" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0.526" right="1" top="0.492" bottom="0.570" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp" alphaMode="ADD">
+                	<TexCoords left="0.526" right="1" top="0.571" bottom="0.648" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0.526" right="1" top="0.649" bottom="0.726" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+    
+    <Button name="MasterPanel:WPWalkButtonTemplate" virtual="true">
+                <Size>
+                    <AbsDimension x="98.42" y="32.56"/>
+                </Size>
+                <NormalTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0" right="0.476" top="0.735" bottom="0.812" />
+                </NormalTexture>
+                <HighlightTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp" alphaMode="ADD">
+                	<TexCoords left="0" right="0.476" top="0.813" bottom="0.890" />
+                </HighlightTexture>
+                <PushedTexture file="Interface\AddOns\MasterPanel\IMG\Buttons2.blp">
+                	<TexCoords left="0" right="0.476" top="0.891" bottom="0.968" />
+                </PushedTexture>
+                <ButtonText name="$parentText" inherits="NumberFontNormalSmallGray">
+                  <Anchors>
+                    <Anchor relativeKey="$parent" point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="37" y="7" />
+                        </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10"/>
+                  </FontHeight>
+                </ButtonText>
+                <Scripts>
+                     <OnLoad>
+                       self:RegisterForClicks("AnyUp");
+                     </OnLoad>
+                </Scripts>
+    </Button>
+</Ui>

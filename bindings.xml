@@ -1,0 +1,214 @@
+﻿<Bindings>
+  <Binding name="MPA_DELNPC" description="Default description" header="SEARCHANDDELHEADER">
+    MPA_SearchAndDelPanel.DeleteNPC.Icon:Click();
+  </Binding>
+  <Binding name="MPA_DELNEARNPC" description="Default description">
+    MPA_SearchAndDelPanel.DeleteNearNPC.Icon:Click();
+  </Binding>
+  <Binding name="MPA_UNDOGOBJECT" description="Default description">
+    MPA_SearchAndDelPanel.UndoGob.Icon:Click();
+  </Binding>
+  <Binding name="MPA_LOOKUPGOBJECT" description="Default description" runOnUp="true">
+    MPA_MainPanel:Show();
+    MPA_SearchAndDelPanel.LoObjButton:Click();
+  </Binding>
+  <Binding name="MPA_LOOKUPCREATURE" description="Default description" runOnUp="true">
+    MPA_MainPanel:Show();
+    MPA_SearchAndDelPanel.LoCrButton:Click();
+  </Binding>
+  <Binding name="MPA_UNDOGOBNAME" description="Default description" runOnUp="true">
+    MPA_SearchAndDelPanel.GobDelByNameButton.Icon:Click();
+  </Binding>
+  <Binding name="MPA_UNDOGOBRADIUS" description="Default description" runOnUp="true">
+    MPA_SearchAndDelPanel.GobDelRadiusButton.Icon:Click();
+  </Binding>
+  
+  
+  <Binding name="MPA_NPCSAY" description="Default description" runOnUp="true" header="CHATCONTROLLHEADER">
+    MPA_MainPanel:Show();
+    MPA_NPCPanel.NPCSay_Button:Click();
+  </Binding>
+  <Binding name="MPA_NPCEMOTE" description="Default description" runOnUp="true">
+    MPA_MainPanel:Show();
+    MPA_NPCPanel.NPCEmote_Button:Click();
+  </Binding>
+  <Binding name="MPA_NPCYELL" description="Default description" runOnUp="true">
+    MPA_MainPanel:Show();
+    MPA_NPCPanel.NPCYell_Button:Click();
+  </Binding>
+  <Binding name="MPA_COLOURCHAT" description="Default description" runOnUp="true">
+    MPA_MainPanel:Show();
+    MPA_NPCPanel.Colour_Button:Click();
+  </Binding>
+  <Binding name="MPA_TALKINGHEADCHAT" description="Default description" runOnUp="true">
+    MPA_MainPanel:Show();
+    MPA_NPCPanel.TalkingHead_Button:Click();
+  </Binding>
+  
+  
+  <Binding name="MPA_SETAURA" description="Default description" runOnUp="true" header="AURASANDSTATESHEADER">
+    MPA_MainPanel:Show();
+    MPA_AurasAndStatesPanel.SetAura.Icon:Click();
+  </Binding>
+  <Binding name="MPA_CLEARAURA" description="Default description" runOnUp="true">
+    MPA_MainPanel:Show();
+    MPA_AurasAndStatesPanel.ClearAura.Icon:Click();
+  </Binding>
+  <Binding name="MPA_CLEARALLAURA" description="Default description" runOnUp="true">
+    MasterPanel:ClearAllAuraBind()
+  </Binding>
+  <Binding name="MPA_SETSCALE" description="Default description" runOnUp="true">
+    MPA_MainPanel:Show();
+    MPA_AurasAndStatesPanel.SetScale.Icon:Click();
+  </Binding>
+  <Binding name="MPA_SETMORPH" description="Default description" runOnUp="true">
+    MPA_MainPanel:Show();
+    MPA_AurasAndStatesPanel.Morph:Click();
+  </Binding>
+  <Binding name="MPA_DEMORPH" description="Default description" runOnUp="true">
+    MPA_AurasAndStatesPanel.DeMorph:Click();
+  </Binding>
+  <Binding name="MPA_SETPHASE" description="Default description" runOnUp="true">
+    MPA_MainPanel:Show();
+    MPA_AurasAndStatesPanel.Phase:Click();
+  </Binding>
+  <Binding name="MPA_SETVISUALSPELL" description="Default description">
+    MPA_AurasAndStatesPanel.CastVisual.Icon:Click();
+  </Binding>
+  <Binding name="MPA_STOPVISUALSPELL" description="Default description" runOnUp="true">
+    MPA_AurasAndStatesPanel.StopCastVisual.Icon:Click();
+  </Binding>
+  
+    <Binding name="MPA_WAYPOINTS" description="Default description" header="NPCCONTROLHEADER">
+        MPA_ControlPanel.Waypoint:Click();
+    </Binding>
+    <Binding name="MPA_POSS" description="Default description">
+        MPA_ControlPanel.PossUnposs:Click();
+    </Binding>
+    <Binding name="MPA_BATTLEPANEL" description="Default description">
+        MPA_ControlPanel.RollButton:Click();
+    </Binding>
+    <Binding name="MPA_SUMMON" description="Default description" runOnUp="true">
+        MPA_MainPanel:Show();
+        MPA_ControlPanel.Summon.Icon:Click();
+    </Binding>
+    <Binding name="MPA_NPCPLAYEMOTE" description="Default description" runOnUp="true">
+        MPA_MainPanel:Show();
+        MPA_ControlPanel.EmoteST.Icon:Click();
+    </Binding>
+    <Binding name="MPA_NPCSTATEMENT" description="Default description" runOnUp="true">
+        MPA_MainPanel:Show();
+        MPA_ControlPanel.EmoteStatement.Icon:Click();
+    </Binding>
+    <Binding name="MPA_ARMYCONTROL" description="Default description">
+        MPA_ControlPanel.Army.Icon:Click();
+    </Binding>
+    
+   <Binding name="MPA_ROLLTARGET" description="Default description" header="BATTLEPANELHEADER">
+        MPA_BattlePanel.GetTargetRoll.Icon:Click();
+   </Binding>
+   <Binding name="MPA_ROLLSRT" description="Default description">
+        MPA_BattlePanel.RollStr.Icon:Click();
+   </Binding>
+   <Binding name="MPA_ROLLAGIL" description="Default description">
+        MPA_BattlePanel.RollAgila.Icon:Click();
+   </Binding>
+   <Binding name="MPA_ROLLINT" description="Default description">
+        MPA_BattlePanel.RollInt.Icon:Click();
+   </Binding>
+   <Binding name="MPA_SETHP" description="Default description">
+        MPA_BattlePanel.SetHP:Click();
+   </Binding>
+   <Binding name="MPA_DAMHP" description="Default description">
+        MPA_BattlePanel.DamHP:Click();
+   </Binding>
+   <Binding name="MPA_ADDHP" description="Default description">
+        MPA_BattlePanel.AddHP:Click();
+   </Binding>
+   <Binding name="MPA_SETARMOR" description="Default description">
+        MPA_BattlePanel.SetArmor:Click();
+   </Binding>
+   <Binding name="MPA_DAMARMOR" description="Default description">
+        MPA_BattlePanel.RemoveArmor:Click();
+   </Binding>
+   <Binding name="MPA_ADDARMOR" description="Default description">
+        MPA_BattlePanel.AddArmor:Click();
+   </Binding>
+   <Binding name="MPA_SETWOUND" description="Default description">
+        MPA_BattlePanel.SetWound:Click();
+   </Binding>
+   <Binding name="MPA_WAKEUP" description="Default description">
+        MPA_BattlePanel.WakeUp:Click();
+   </Binding>
+   
+   <Binding name="MPA_SETDIFF" description="Default description" runOnUp="true">
+        MPA_MainPanel:Show();
+        MasterPanel:SetDiffFunc();
+    </Binding>
+    <Binding name="MPA_RAIDSETDIFF" description="Default description" runOnUp="true">
+        MPA_MainPanel:Show();
+        MasterPanel:SetDiffRaidFunc();
+    </Binding>
+    
+   <Binding name="MPA_WPMOVE" description="Default description" header="WAYPOINTHEADER">
+        MPA_WaypointPanel.WpMove:Click();
+   </Binding>
+   <Binding name="MPA_WPWALK" description="Default description">
+        MPA_WaypointPanel.WpWalk:Click();
+   </Binding>
+   <Binding name="MPA_WPWAIT" description="Default description">
+       MPA_WaypointPanel.WpWait:Click();
+   </Binding>
+   <Binding name="MPA_WPEMOTE" description="Default description">
+       MPA_WaypointPanel.WpEmote:Click();
+   </Binding>
+   <Binding name="MPA_WPCLEAR" description="Default description">
+       MPA_WaypointPanel.WpClear:Click();
+   </Binding>
+   <Binding name="MPA_WPGO" description="Default description">
+       MPA_WaypointPanel.WpGo:Click();
+   </Binding>
+   
+   <Binding name="MPA_CLEAREDIT" description="Default description" header="MPADOPSHEADER">
+        MasterPanel:ClearEditboxFunc();
+   </Binding>
+   <Binding name="MPA_AURADEATH" description="Default description">
+        MasterPanel:AuraDeathFunc();
+   </Binding>
+   <Binding name="MPA_AURALAY" description="Default description">
+        MasterPanel:AuraLayFunc();
+   </Binding>
+   <Binding name="MPA_OPENADDON" description="Default description">
+        MasterPanel:MinMapButtonFunc();
+   </Binding>
+   <Binding name="MPA_RAIDSUMM" description="Default description">
+        MasterPanel:RaidSumm();
+   </Binding>
+   
+   
+   <Binding name="MPA_MAINMENU" description="Default description" header="MPAPANELSSHEADER">
+        MPA_MainPanel:Show();
+        MPA_MainPanel.RefreshButton:Click();
+   </Binding>
+   <Binding name="MPA_INSCHACT" description="Default description">
+        MPA_MainPanel:Show();
+        MPA_SelectPanel.NPCButton.Icon:Click();
+   </Binding>
+   <Binding name="MPA_SERCDEL" description="Default description">
+        MPA_MainPanel:Show();
+        MPA_SelectPanel.SearchAndDel.Icon:Click();
+   </Binding>
+   <Binding name="MPA_AURASTAT" description="Default description">
+        MPA_MainPanel:Show();
+        MPA_SelectPanel.AurasButton.Icon:Click();
+   </Binding>
+   <Binding name="MPA_CONTNPC" description="Default description">
+        MPA_MainPanel:Show();
+        MPA_SelectPanel.Dops.Icon:Click();
+   </Binding>
+   <Binding name="MPA_SETT" description="Default description">
+        MPA_MainPanel:Show();
+        MPA_SelectPanel.Options.Icon:Click();
+   </Binding>
+   
+</Bindings>
