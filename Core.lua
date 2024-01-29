@@ -10,8 +10,8 @@ local BindingName
 local ConvertedBind
 local LastPossName
 local MessageRadius = 1
-local Chosen_colour = 1
-local Chosen_GobDelRadius = 2
+local Chosen_colour = 3
+local Chosen_GobDelRadius = 0
 local colorCode = "|cffd3a3e3"
 local booleanBattlePanel = true
 
@@ -269,10 +269,6 @@ end
 --------/// MainPanel UI
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-function CloseMasterPanel()
-    MPA_MainPanel:Hide()
-end
-
 local MPA_MainPanel = CreateFrame("Frame", "MPA_MainPanel", UIParent)
 MPA_MainPanel:SetClampedToScreen(true)
 MPA_MainPanel:Hide()
@@ -313,7 +309,7 @@ MPA_MainPanel.CloseButton:SetAlpha(.9)
 MPA_MainPanel.CloseButton:SetPoint("CENTER", MPA_MainPanel, "CENTER", 142, 41)
 MPA_MainPanel.CloseButton:RegisterForClicks("AnyUp")
 MPA_MainPanel.CloseButton:SetScript("OnClick", function(self)
-    MPA_MainPanel:Hide()
+    MasterPanel:Esc()
 end)
 
 MPA_MainPanel.RefreshButton = CreateFrame("BUTTON", "MPA_MainPanel.RefreshButton", MPA_MainPanel,
@@ -374,13 +370,7 @@ MPA_EditPanel.EditBox:SetScript('OnEditFocusGained', function(self, elapsed)
 end)
 
 MPA_EditPanel.EditBox:SetScript('OnEscapePressed', function(self)
-    MPA_EditPanel.EditBox:ClearFocus()
-    MPA_MainPanel:Hide()
-    if EditboxStatement == "NPCSAYSTATE" or EditboxStatement == "NPCYELLSTATE" then
-        if MasterPanel.db.profile.settings.NPCTalkAnimation then
-            SendChatMessage(".npc playemote 0", "SAY")
-        end
-    end
+    MPA_MainPanel:Esc()
 end)
 
 MPA_EditPanel.EditBox:SetScript('OnEnterPressed', function(self)
@@ -414,7 +404,7 @@ MPA_EditPanel.EditBox:SetScript('OnEnterPressed', function(self)
         else
             if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
                 SendChatMessage(".npc playemote 0", "SAY")
-                MPA_MainPanel:Hide()
+                MasterPanel:Esc()
             end
             if not MasterPanel.db.profile.settings.NPCSayByEmote then
                 MessageStringSplitter(tostring(EditboxText), 1, 0, 0)
@@ -447,7 +437,7 @@ MPA_EditPanel.EditBox:SetScript('OnEnterPressed', function(self)
             MessageStringSplitter(tostring(EditboxText), 4, 0, 0)
             if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
                 SendChatMessage(".npc playemote 0", "SAY")
-                MPA_MainPanel:Hide()
+                MasterPanel:Esc()
             end
         end
     elseif EditboxStatement == "CHATCOLORSTATE" then
@@ -2055,23 +2045,6 @@ SettingsFrame.SaveFocusEditbox:SetScript("OnClick", function()
     end
 end);
 
-SettingsFrame.NPCTalkAnimation = CreateFrame("CheckButton", "SettingsFrame_NPCSay", SettingsFrame.SaveFocusEditbox,
-    "ChatConfigCheckButtonTemplate");
-SettingsFrame.NPCTalkAnimation:SetPoint("TOPLEFT", SettingsFrame.SaveFocusEditbox, "BOTTOMLEFT", 0, 0);
-SettingsFrame.NPCTalkAnimation.tooltip = "Переключение в режим NPC SAY одной строки.";
-SettingsFrame.NPCTalkAnimation:SetScript("OnClick", function()
-    MasterPanel.db.profile.settings.NPCTalkAnimation = not MasterPanel.db.profile.settings.NPCTalkAnimation
-    if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
-        SettingsFrame.NPCTalkAnimation:SetChecked(true)
-    else
-        SettingsFrame.NPCTalkAnimation:SetChecked(false)
-    end
-end);
-SettingsFrame.NPCTalkAnimation.label = SettingsFrame.NPCTalkAnimation:CreateFontString(nil, "ARTWORK",
-    "GameFontHighlight")
-SettingsFrame.NPCTalkAnimation.label:SetPoint("LEFT", SettingsFrame.NPCTalkAnimation, "RIGHT", 0, 0)
-SettingsFrame.NPCTalkAnimation.label:SetText("Анимация речи NPC")
-
 SettingsFrame.RollStateEditBox = CreateFrame("EditBox", "SettingsFrame.RollStateEditBox", SettingsFrame,
     "InputBoxTemplate")
 SettingsFrame.RollStateEditBox:SetPoint("TOPLEFT", SettingsFrame.NPCTalkAnimation, "BOTTOMLEFT", 5, -20)
@@ -2239,7 +2212,7 @@ end
 
 function MasterPanel:MinMapButtonFunc()
     if MPA_MainPanel:IsVisible() then
-        MPA_MainPanel:Hide()
+        MasterPanel:Esc()
     else
         MPA_MainPanel:Show()
     end
@@ -2284,5 +2257,34 @@ function MasterPanel:RaidSumm()
         Sum_d_d = "raid" .. Sum_d
         Sum_name = UnitName(Sum_d_d)
         SendChatMessage(".sum " .. Sum_name, "WHISPER", GetDefaultLanguage("player"), GetUnitName("player"));
+    end
+end
+
+-- Анимация речи NPC
+
+SettingsFrame.NPCTalkAnimation = CreateFrame("CheckButton", "SettingsFrame_NPCSay", SettingsFrame.SaveFocusEditbox,
+    "ChatConfigCheckButtonTemplate");
+SettingsFrame.NPCTalkAnimation:SetChecked()
+SettingsFrame.NPCTalkAnimation:SetPoint("TOPLEFT", SettingsFrame.SaveFocusEditbox, "BOTTOMLEFT", 0, 0);
+SettingsFrame.NPCTalkAnimation.tooltip = "Переключение в режим NPC SAY одной строки.";
+SettingsFrame.NPCTalkAnimation:SetScript("OnClick", function()
+    MasterPanel.db.profile.settings.NPCTalkAnimation = not MasterPanel.db.profile.settings.NPCTalkAnimation
+    if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
+        SettingsFrame.NPCTalkAnimation:SetChecked(true)
+    else
+        SettingsFrame.NPCTalkAnimation:SetChecked(false)
+    end
+end);
+SettingsFrame.NPCTalkAnimation.label = SettingsFrame.NPCTalkAnimation:CreateFontString(nil, "ARTWORK",
+    "GameFontHighlight")
+SettingsFrame.NPCTalkAnimation.label:SetPoint("LEFT", SettingsFrame.NPCTalkAnimation, "RIGHT", 0, 0)
+SettingsFrame.NPCTalkAnimation.label:SetText("Анимация речи NPC")
+
+function MasterPanel:Esc()
+    MPA_MainPanel:Hide()
+    if EditboxStatement == "NPCSAYSTATE" or EditboxStatement == "NPCYELLSTATE" then
+        if MasterPanel.db.profile.settings.NPCTalkAnimation then
+            SendChatMessage(".npc playemote 0", "SAY")
+        end
     end
 end
