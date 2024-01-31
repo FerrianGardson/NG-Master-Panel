@@ -6,15 +6,26 @@
 			<BackgroundInsets right="-100" bottom="-240" />
 		</Backdrop>
 		<Frames>
-			<Button name="SetHPBtn" inherits="UIPanelButtonTemplate" text="Выставить ОЗ">
+			<Button name="SetHPBtn" inherits="UIPanelButtonTemplate" text="Выст. ОЗ/ОБ">
 				<Size x="100" y="25" />
 				<Anchors>
 					<Anchor x="10" y="-20" point="TOPLEFT" />
 				</Anchors>
 				<Scripts>
+					<OnLoad>
+						self:RegisterForClicks("LeftButtonUp", "RightButtonDown");
+					</OnLoad>
 					<OnClick>
-						SetHPBtn_OnClick()
+						SetHPBtn_OnClick(button)
 					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:AddLine("ЛКМ: выставить Очки Здоровья|nПКМ: выставить Очки Брони")
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
 				</Scripts>
 			</Button>
 			<EditBox name="SetHPEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
@@ -23,15 +34,26 @@
 					<Anchor x="116" y="-16" point="TOPLEFT" />
 				</Anchors>
 			</EditBox>
-			<Button name="DamHPBtn" inherits="UIPanelButtonTemplate" text="Снять ОЗ">
+			<Button name="DamHPBtn" inherits="UIPanelButtonTemplate" text="Снять ОЗ/ОБ">
 				<Size x="100" y="25" />
 				<Anchors>
 					<Anchor x="10" y="-51" point="TOPLEFT" />
 				</Anchors>
 				<Scripts>
+					<OnLoad>
+						self:RegisterForClicks("LeftButtonUp", "RightButtonDown");
+					</OnLoad>
 					<OnClick>
-						DamHPBtn_OnClick()
+						DamHPBtn_OnClick(button)
 					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:AddLine("ЛКМ: снять Очки Здоровья|nПКМ: снять Очки Брони")
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
 				</Scripts>
 			</Button>
 			<EditBox name="DamHPEditBox" inherits="InputBoxTemplate" letters="3" numeric="true" autoFocus="false">
@@ -46,15 +68,26 @@
 					<Anchor x="116" y="-78" point="TOPLEFT" />
 				</Anchors>
 			</EditBox>
-			<Button name="AddHPBtn" inherits="UIPanelButtonTemplate" text="Добавить ОЗ">
+			<Button name="AddHPBtn" inherits="UIPanelButtonTemplate" text="Доб. ОЗ/ОБ">
 				<Size x="100" y="25" />
 				<Anchors>
 					<Anchor x="10" y="-82" point="TOPLEFT" />
 				</Anchors>
 				<Scripts>
+					<OnLoad>
+						self:RegisterForClicks("LeftButtonUp", "RightButtonDown");
+					</OnLoad>
 					<OnClick>
-						AddHPBtn_OnClick()
+						AddHPBtn_OnClick(button)
 					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+						GameTooltip:AddLine("ЛКМ: добавить Очки Здоровья|nПКМ: добавить Очки Брони")
+						GameTooltip:Show()
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide()
+					</OnLeave>
 				</Scripts>
 			</Button>
 			<Button name="SetWoundBtn" inherits="UIPanelButtonTemplate" text="Доб. рану">
@@ -74,14 +107,17 @@
 					<Anchor x="116" y="-109" point="TOPLEFT" />
 				</Anchors>
 			</EditBox>
-			<Button name="SetAPBtn" inherits="UIPanelButtonTemplate" text="Выст. броню">
+			<Button name="SetAPBtn" inherits="UIPanelButtonTemplate" text="Выставить ОЭ">
 				<Size x="100" y="25" />
 				<Anchors>
 					<Anchor x="167" y="-20" point="TOPLEFT" />
 				</Anchors>
 				<Scripts>
+					<OnLoad>
+						self:RegisterForClicks("LeftButtonUp", "RightButtonDown");
+					</OnLoad>
 					<OnClick>
-						SetAPBtn_OnClick()
+						SetAPBtn_OnClick(button)
 					</OnClick>
 				</Scripts>
 			</Button>
@@ -110,14 +146,17 @@
 					</OnLeave>
 				</Scripts>
 			</Button>
-			<Button name="AddAPBtn" inherits="UIPanelButtonTemplate" text="Доб. броню">
+			<Button name="AddAPBtn" inherits="UIPanelButtonTemplate" text="Добавить ОЭ">
 				<Size x="100" y="25" />
 				<Anchors>
 					<Anchor x="167" y="-82" point="TOPLEFT" />
 				</Anchors>
 				<Scripts>
+					<OnLoad>
+						self:RegisterForClicks("LeftButtonUp", "RightButtonDown");
+					</OnLoad>
 					<OnClick>
-						AddAPBtn_OnClick()
+						AddAPBtn_OnClick(button)
 					</OnClick>
 				</Scripts>
 			</Button>
@@ -133,14 +172,17 @@
 					<Anchor x="273" y="-47" point="TOPLEFT" />
 				</Anchors>
 			</EditBox>
-			<Button name="DamAPBtn" inherits="UIPanelButtonTemplate" text="Снять броню">
+			<Button name="DamAPBtn" inherits="UIPanelButtonTemplate" text="Снять ОЭ">
 				<Size x="100" y="25" />
 				<Anchors>
 					<Anchor x="167" y="-51" point="TOPLEFT" />
 				</Anchors>
 				<Scripts>
+					<OnLoad>
+						self:RegisterForClicks("LeftButtonUp", "RightButtonDown");
+					</OnLoad>
 					<OnClick>
-						DamAPBtn_OnClick()
+						DamAPBtn_OnClick(button)
 					</OnClick>
 				</Scripts>
 			</Button>

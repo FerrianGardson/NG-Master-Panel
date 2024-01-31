@@ -402,7 +402,7 @@ MPA_EditPanel.EditBox:SetScript('OnEnterPressed', function(self)
         elseif isempty(tostring(EditboxText)) then
             return
         else
-            if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
+if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
                 SendChatMessage(".npc playemote 0", "SAY")
                 MasterPanel:Esc()
             end
@@ -412,7 +412,6 @@ MPA_EditPanel.EditBox:SetScript('OnEnterPressed', function(self)
                 local TargetName = GetUnitName("target")
                 MessageStringSplitter(TargetName .. " говорит: " .. tostring(EditboxText), 2, 0, 0)
             end
-
         end
     elseif EditboxStatement == "NPCEMOTESTATE" then
         if not isNPCtarget() then
@@ -435,7 +434,7 @@ MPA_EditPanel.EditBox:SetScript('OnEnterPressed', function(self)
             return
         else
             MessageStringSplitter(tostring(EditboxText), 4, 0, 0)
-            if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
+if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
                 SendChatMessage(".npc playemote 0", "SAY")
                 MasterPanel:Esc()
             end
@@ -705,11 +704,11 @@ MPA_EditPanel.EditBox:SetScript('OnEnterPressed', function(self)
             for Call_d = 1, GetNumRaidMembers() do
                 Call_d_d = "raid" .. Call_d
                 Call_name = UnitName(Call_d_d)
-                SendChatMessage(".call " .. Call_name, "WHISPER", GetDefaultLanguage("player"), GetUnitName("player"));
+                SendChatMessage(".sum " .. Call_name, "WHISPER", GetDefaultLanguage("player"), GetUnitName("player"));
             end
             -----
         else
-            SendChatMessage(".call " .. tostring(EditboxText), "WHISPER", GetDefaultLanguage("player"),
+            SendChatMessage(".sum " .. tostring(EditboxText), "WHISPER", GetDefaultLanguage("player"),
                 GetUnitName("player"));
         end
     elseif EditboxStatement == "SETDIFFSTATEMENT" then
@@ -854,7 +853,9 @@ MPA_SelectPanel.Options.Icon.AddLine = colorCode ..
                                            ".tele ShowCase|r перемещает в локацию с различными NPC на выбор;|n" ..
                                            colorCode ..
                                            ".createtargetdisp [название]|r создает Display ID персонажа в таргете;|n" ..
-                                           colorCode .. ".reloadoutfits|r перезагружает Display ID.";
+                                           colorCode .. ".reloadoutfits|r перезагружает Display ID;|n" ..
+                                           colorCode .. ".freeze|r замораживает игрока;|n" ..
+                                           colorCode .. ".unfreeze|r размораживает игрока.";
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 --------/// Select Panel UI
@@ -876,7 +877,7 @@ MPA_NPCPanel.NPCSay_Button:SetScript("OnClick", function(self)
     EditboxStatement = "NPCSAYSTATE";
     MPA_MainPanel.Title:SetText("Отпись за NPC")
     MasterPanel:OpenMainEditbox();
-    if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
+if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
         SendChatMessage(".npc playemote 1", "SAY")
     end
 end)
@@ -914,7 +915,7 @@ MPA_NPCPanel.NPCYell_Button.Tooltip = "Крик за NPC";
 MPA_NPCPanel.NPCYell_Button:SetScript("OnEnter", GameTooltipOnEnter);
 MPA_NPCPanel.NPCYell_Button:SetScript("OnLeave", GameTooltipOnLeave);
 MPA_NPCPanel.NPCYell_Button:SetScript("OnClick", function(self)
-    if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
+if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
         SendChatMessage(".npc playemote 22", "SAY")
     end
     MasterPanel:EditBoxCollectGarbage();
@@ -1010,9 +1011,11 @@ MPA_SearchAndDelPanel.LoObjButton.AddLine = colorCode ..
                                                 colorCode .. ".gobsize [guid] [size]|r - размер объекта;|n" ..
                                                 colorCode .. ".gob act [guid]|r - действие объекта;|n" ..
                                                 colorCode ..
-                                                ".gobtele [guid]|r - перемещает обьект к вам;|n" ..
+                                                ".gobtele [guid]|r - создает телепорт на текущую позицию при клике на ГОшку;|n" ..
                                                 colorCode ..
-                                                ".gobinfo|r показывает GUID, персонажа, дату установки ближайшей ГО.";
+                                                ".gobinfo|r показывает GUID, персонажа, дату установки ближайшей ГО;|n" ..
+                                                colorCode ..
+                                                ".gathergos|r собирает все ваши ГОшки вокруг в инвентарь.";
 MPA_SearchAndDelPanel.LoObjButton:SetScript("OnEnter", GameTooltipOnEnter);
 MPA_SearchAndDelPanel.LoObjButton:SetScript("OnLeave", GameTooltipOnLeave);
 MPA_SearchAndDelPanel.LoObjButton:SetScript("OnClick", function(self)
@@ -1850,17 +1853,32 @@ MPA_ControlPanel.Summon.Icon = CreateFrame("BUTTON", nil, MPA_ControlPanel.Summo
 MPA_ControlPanel.Summon.Icon:SetNormalTexture("interface\\ICONS\\spell_arcane_portalstormwind")
 MPA_ControlPanel.Summon.Icon:SetHighlightTexture("interface\\ICONS\\spell_arcane_portalstormwind")
 MPA_ControlPanel.Summon.Icon:SetAlpha(0.8)
-MPA_ControlPanel.Summon.Icon:SetScript("OnClick", function()
-    MasterPanel:EditBoxCollectGarbage();
-    EditboxStatement = "SUMMONSTATEMENT";
-    MPA_MainPanel.Title:SetText("Суммон игрока")
-    MasterPanel:OpenMainEditbox();
+MPA_ControlPanel.Summon.Icon:SetScript("OnClick", function(self, button)
+    if button == "LeftButton" then
+        MasterPanel:EditBoxCollectGarbage();
+        EditboxStatement = "SUMMONSTATEMENT";
+        MPA_MainPanel.Title:SetText("Суммон игрока")
+        MasterPanel:OpenMainEditbox();
+    elseif button == "RightButton" then
+        if GetUnitName("target") == GetUnitName("player") then
+            print(
+                "|cffff9716[ГМ-аддон]: Вы не можете телепортировать самого себя.|r")
+        elseif UnitIsPlayer("target") then
+            SendChatMessage(".summon " .. GetUnitName("target"), "WHISPER", GetDefaultLanguage("player"),
+                GetUnitName("player"));
+        elseif GetUnitName("target") == nil then
+            print(
+                "|cffff9716[ГМ-аддон]: Необходимо выбрать цель (игрока или npc).|r")
+        else
+            SendChatMessage(".npc move", "WHISPER", GetDefaultLanguage("player"), GetUnitName("player"));
+        end
+    end
 end)
 MPA_ControlPanel.Summon.Icon:SetScript("OnEnter", GameTooltipOnEnter);
 MPA_ControlPanel.Summon.Icon:SetScript("OnLeave", GameTooltipOnLeave);
 MPA_ControlPanel.Summon.Icon.Tooltip = "Суммон игрока или NPC";
 MPA_ControlPanel.Summon.Icon.AddLine =
-    "Суммон выбранной цели (игрока или npc). Если таргета нет - суммон по нику.|nЕсли ввести цифру " ..
+    "ЛКМ: суммон по введенному нику.|nПКМ: суммон выбранной цели (игрока или npc). |nЕсли ввести цифру " ..
         colorCode .. "1|r или слова " .. colorCode .. "рейд|r, " .. colorCode ..
         "all|r - будет суммон ко всему рейду.";
 
@@ -1895,15 +1913,31 @@ MPA_ControlPanel.ToPlayer.Icon = CreateFrame("BUTTON", nil, MPA_ControlPanel.ToP
 MPA_ControlPanel.ToPlayer.Icon:SetNormalTexture("interface\\ICONS\\ability_mount_rocketmount")
 MPA_ControlPanel.ToPlayer.Icon:SetHighlightTexture("interface\\ICONS\\ability_mount_rocketmount")
 MPA_ControlPanel.ToPlayer.Icon:SetAlpha(0.8)
-MPA_ControlPanel.ToPlayer.Icon:SetScript("OnClick", function()
-    MasterPanel:EditBoxCollectGarbage();
-    EditboxStatement = "TOPLAYERSTATEMENT";
-    MPA_MainPanel.Title:SetText("Введите ник игрока")
-    MasterPanel:OpenMainEditbox();
+MPA_ControlPanel.ToPlayer.Icon:SetScript("OnClick", function(self, button)
+    if button == "LeftButton" then
+        MasterPanel:EditBoxCollectGarbage();
+        EditboxStatement = "TOPLAYERSTATEMENT";
+        MPA_MainPanel.Title:SetText("Введите ник игрока")
+        MasterPanel:OpenMainEditbox();
+    elseif button == "RightButton" then
+        if GetUnitName("target") == GetUnitName("player") then
+            print(
+                "|cffff9716[ГМ-аддон]: Вы не можете телепортироваться к самому себе.|r")
+        elseif UnitIsPlayer("target") then
+            SendChatMessage(".app " .. GetUnitName("target"), "WHISPER", GetDefaultLanguage("player"),
+                GetUnitName("player"));
+        elseif GetUnitName("target") == nil then
+            print("|cffff9716[ГМ-аддон]: Необходимо выбрать игрока в цель.|r")
+        else
+            print("|cffff9716[ГМ-аддон]: Необходимо выбрать игрока в цель.|r")
+        end
+    end
 end)
 MPA_ControlPanel.ToPlayer.Icon:SetScript("OnEnter", GameTooltipOnEnter);
 MPA_ControlPanel.ToPlayer.Icon:SetScript("OnLeave", GameTooltipOnLeave);
 MPA_ControlPanel.ToPlayer.Icon.Tooltip = "Телепорт к игроку";
+MPA_ControlPanel.ToPlayer.Icon.AddLine =
+    "ЛКМ: телепорт по введенному нику.|nПКМ: телепорт к выбранному игроку.";
 
 -- To Player end
 

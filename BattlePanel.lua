@@ -96,46 +96,68 @@ end
 -- [ОЗ/броня] --
 
 
--- Выставить ОЗ
-function SetHPBtn_OnClick()
-	if tonumber(SetHPEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
-    SendChatMessage(".sethp " .. tonumber(SetHPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+-- Выставить ОЗ (ОБ)
+function SetHPBtn_OnClick(button)
+	if (button == "LeftButton") then
+		if tonumber(SetHPEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
+		SendChatMessage(".sethp " .. tonumber(SetHPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	elseif (button == "RightButton") then
+		if tonumber(SetHPEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
+		SendChatMessage(".setarmor " .. tonumber(SetHPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	end
+	LostFocus(SetHPEditBox)
 end
 
--- Снять ОЗ
-function DamHPBtn_OnClick()
-	if tonumber(DamHPEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
-    SendChatMessage(".damhp " .. tonumber(DamHPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+-- Снять ОЗ (ОБ)
+function DamHPBtn_OnClick(button)
+	if (button == "LeftButton") then
+		if tonumber(DamHPEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
+		SendChatMessage(".damhp " .. tonumber(DamHPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	elseif (button == "RightButton") then
+		if tonumber(DamHPEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
+		SendChatMessage(".removearmor " .. tonumber(DamHPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	end
+	LostFocus(DamHPEditBox)
 end
 
--- Добавить ОЗ
-function AddHPBtn_OnClick()
-	if tonumber(AddHPEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
-    SendChatMessage(".addhp " .. tonumber(AddHPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+-- Добавить ОЗ (ОБ)
+function AddHPBtn_OnClick(button)
+	if (button == "LeftButton") then
+		if tonumber(AddHPEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
+		SendChatMessage(".addhp " .. tonumber(AddHPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	elseif (button == "RightButton") then
+		if tonumber(AddHPEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
+		SendChatMessage(".addarmor " .. tonumber(AddHPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	end
+	LostFocus(AddHPEditBox)
 end
 
 -- Добавить рану
 function SetWoundBtn_OnClick()
 	if tonumber(SetWoundEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
     SendChatMessage(".setwound " .. tonumber(SetWoundEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	LostFocus(SetWoundEditBox)
 end
 
--- Выставить броню
+-- Выставить броню (энергию)
 function SetAPBtn_OnClick()
 	if tonumber(SetAPEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
-    SendChatMessage(".setarmor " .. tonumber(SetAPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	SendChatMessage(".seten " .. tonumber(SetAPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	LostFocus(SetAPEditBox)
 end
 
--- Снять броню
+-- Снять броню (энергию)
 function DamAPBtn_OnClick()
 	if tonumber(DamAPEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
-    SendChatMessage(".removearmor " .. tonumber(DamAPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	SendChatMessage(".damen " .. tonumber(DamAPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	LostFocus(DamAPEditBox)
 end
 
--- Добавить броню
+-- Добавить броню (энергию)
 function AddAPBtn_OnClick()
 	if tonumber(AddAPEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
-    SendChatMessage(".addarmor " .. tonumber(AddAPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+    SendChatMessage(".adden " .. tonumber(AddAPEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	LostFocus(AddAPEditBox)
 end
 
 -- Убрать ОЗ
@@ -151,30 +173,35 @@ end
 function SetStrBtn_OnClick()
 	if tonumber(SetStrEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
     SendChatMessage(".npcsetstat 1 " .. tonumber(SetStrEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	LostFocus(SetStrEditBox)
 end
 
 -- Ловкость
 function SetAgilBtn_OnClick()
 	if tonumber(SetAgilEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
     SendChatMessage(".npcsetstat 2 " .. tonumber(SetAgilEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	LostFocus(SetAgilEditBox)
 end
 
 -- Интеллект
 function SetIntBtn_OnClick()
 	if tonumber(SetIntEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
     SendChatMessage(".npcsetstat 3 " .. tonumber(SetIntEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	LostFocus(SetIntEditBox)
 end
 
 -- Физическая защита
 function SetPhysResBtn_OnClick()
 	if tonumber(SetPhysResEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
     SendChatMessage(".npcsetstat 5 " .. tonumber(SetPhysResEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	LostFocus(SetPhysResEditBox)
 end
 
 -- Магическая защита
 function SetMagResBtn_OnClick()
 	if tonumber(SetMagResEditBox:GetText()) == nil then print("|cffff9716[ГМ-аддон]: Необходимо ввести значение.|r") return end
     SendChatMessage(".npcsetstat 6 " .. tonumber(SetMagResEditBox:GetText()),"WHISPER" ,GetDefaultLanguage("player"),GetUnitName("player"))
+	LostFocus(SetMagResEditBox)
 end
 
 
