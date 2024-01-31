@@ -38,6 +38,16 @@ local MinimapIconButton = LibStub("LibDBIcon-1.0")
 -- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 --[[                            Scripts                                      ]]
 -- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
+
+local function MPA_Esc()
+    MPA_MainPanel:Hide()
+    if EditboxStatement == "NPCSAYSTATE" or EditboxStatement == "NPCYELLSTATE" then
+        if MasterPanel.db.profile.settings.NPCTalkAnimation then
+            SendChatMessage(".npc playemote 0", "SAY")
+        end
+    end
+end
+
 local function BindingTextSplitter(BindingName)
     if BindingName:len() <= 4 then
         BindingName = BindingName
@@ -309,7 +319,7 @@ MPA_MainPanel.CloseButton:SetAlpha(.9)
 MPA_MainPanel.CloseButton:SetPoint("CENTER", MPA_MainPanel, "CENTER", 142, 41)
 MPA_MainPanel.CloseButton:RegisterForClicks("AnyUp")
 MPA_MainPanel.CloseButton:SetScript("OnClick", function(self)
-    MasterPanel:Esc()
+    MPA_Esc()
 end)
 
 MPA_MainPanel.RefreshButton = CreateFrame("BUTTON", "MPA_MainPanel.RefreshButton", MPA_MainPanel,
@@ -370,7 +380,7 @@ MPA_EditPanel.EditBox:SetScript('OnEditFocusGained', function(self, elapsed)
 end)
 
 MPA_EditPanel.EditBox:SetScript('OnEscapePressed', function(self)
-    MPA_MainPanel:Esc()
+    MPA_Esc()
 end)
 
 MPA_EditPanel.EditBox:SetScript('OnEnterPressed', function(self)
@@ -402,9 +412,9 @@ MPA_EditPanel.EditBox:SetScript('OnEnterPressed', function(self)
         elseif isempty(tostring(EditboxText)) then
             return
         else
-if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
+            if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
                 SendChatMessage(".npc playemote 0", "SAY")
-                MasterPanel:Esc()
+                MPA_Esc()
             end
             if not MasterPanel.db.profile.settings.NPCSayByEmote then
                 MessageStringSplitter(tostring(EditboxText), 1, 0, 0)
@@ -434,9 +444,9 @@ if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
             return
         else
             MessageStringSplitter(tostring(EditboxText), 4, 0, 0)
-if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
+            if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
                 SendChatMessage(".npc playemote 0", "SAY")
-                MasterPanel:Esc()
+                MPA_Esc()
             end
         end
     elseif EditboxStatement == "CHATCOLORSTATE" then
@@ -877,7 +887,7 @@ MPA_NPCPanel.NPCSay_Button:SetScript("OnClick", function(self)
     EditboxStatement = "NPCSAYSTATE";
     MPA_MainPanel.Title:SetText("Отпись за NPC")
     MasterPanel:OpenMainEditbox();
-if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
+    if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
         SendChatMessage(".npc playemote 1", "SAY")
     end
 end)
@@ -915,7 +925,7 @@ MPA_NPCPanel.NPCYell_Button.Tooltip = "Крик за NPC";
 MPA_NPCPanel.NPCYell_Button:SetScript("OnEnter", GameTooltipOnEnter);
 MPA_NPCPanel.NPCYell_Button:SetScript("OnLeave", GameTooltipOnLeave);
 MPA_NPCPanel.NPCYell_Button:SetScript("OnClick", function(self)
-if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
+    if MasterPanel.db.profile.settings.NPCTalkAnimation == true then
         SendChatMessage(".npc playemote 22", "SAY")
     end
     MasterPanel:EditBoxCollectGarbage();
@@ -2246,7 +2256,7 @@ end
 
 function MasterPanel:MinMapButtonFunc()
     if MPA_MainPanel:IsVisible() then
-        MasterPanel:Esc()
+        MPA_Esc()
     else
         MPA_MainPanel:Show()
     end
@@ -2314,11 +2324,3 @@ SettingsFrame.NPCTalkAnimation.label = SettingsFrame.NPCTalkAnimation:CreateFont
 SettingsFrame.NPCTalkAnimation.label:SetPoint("LEFT", SettingsFrame.NPCTalkAnimation, "RIGHT", 0, 0)
 SettingsFrame.NPCTalkAnimation.label:SetText("Анимация речи NPC")
 
-function MasterPanel:Esc()
-    MPA_MainPanel:Hide()
-    if EditboxStatement == "NPCSAYSTATE" or EditboxStatement == "NPCYELLSTATE" then
-        if MasterPanel.db.profile.settings.NPCTalkAnimation then
-            SendChatMessage(".npc playemote 0", "SAY")
-        end
-    end
-end
