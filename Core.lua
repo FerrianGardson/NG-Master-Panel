@@ -167,6 +167,12 @@ function MasterPanel:OnInitialize()
         }
     })
     MinimapIconButton:Register("MPA_Minimap", MPA_LDB, self.db.profile.minimap)
+
+    -- Включить стелс, разрешить шёпот
+    SendChatMessage(".gm vis on", "SAY")
+    SendChatMessage(".gm vis off", "SAY")
+    SendChatMessage(".whisp on", "SAY")
+
 end
 
 function MasterPanel:OnEnable()
