@@ -168,10 +168,7 @@ function MasterPanel:OnInitialize()
     })
     MinimapIconButton:Register("MPA_Minimap", MPA_LDB, self.db.profile.minimap)
 
-    -- Включить стелс, разрешить шёпот
-    SendChatMessage(".gm vis on", "SAY")
-    SendChatMessage(".gm vis off", "SAY")
-    SendChatMessage(".whisp on", "SAY")
+
 
 end
 
@@ -2330,3 +2327,12 @@ SettingsFrame.NPCTalkAnimation.label = SettingsFrame.NPCTalkAnimation:CreateFont
 SettingsFrame.NPCTalkAnimation.label:SetPoint("LEFT", SettingsFrame.NPCTalkAnimation, "RIGHT", 0, 0)
 SettingsFrame.NPCTalkAnimation.label:SetText("Анимация речи NPC")
 
+function Restealth()
+    -- Включить стелс, разрешить шёпот
+    SendChatMessage(".gm vis on", "SAY")
+    SendChatMessage(".whisp on", "SAY")
+    SendChatMessage(".gm vis off", "SAY")
+    print("Рестелс")
+end
+
+Restealth()
