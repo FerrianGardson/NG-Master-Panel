@@ -168,8 +168,6 @@ function MasterPanel:OnInitialize()
     })
     MinimapIconButton:Register("MPA_Minimap", MPA_LDB, self.db.profile.minimap)
 
-
-
 end
 
 function MasterPanel:OnEnable()
@@ -2327,12 +2325,23 @@ SettingsFrame.NPCTalkAnimation.label = SettingsFrame.NPCTalkAnimation:CreateFont
 SettingsFrame.NPCTalkAnimation.label:SetPoint("LEFT", SettingsFrame.NPCTalkAnimation, "RIGHT", 0, 0)
 SettingsFrame.NPCTalkAnimation.label:SetText("Анимация речи NPC")
 
-function Restealth()
-    -- Включить стелс, разрешить шёпот
+-- Прожатие команд при заходе в игру
+
+function GMStart()
+    -- Включить стелс, разрешить шёпот, прочее и прочее
     SendChatMessage(".gm vis on", "SAY")
     SendChatMessage(".whisp on", "SAY")
     SendChatMessage(".gm vis off", "SAY")
-    print("Рестелс")
+    SendChatMessage(".mod scale 0.1", "SAY")
+    SendChatMessage(".gm fly on", "SAY")
+    SendChatMessage(".mod sp 10", "SAY")
 end
 
-Restealth()
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+
+frame:SetScript("OnEvent", function(self, event, ...)
+    if event == "PLAYER_ENTERING_WORLD" then
+        GMStart() -- Вызываем функцию GMStart()
+    end
+end)
